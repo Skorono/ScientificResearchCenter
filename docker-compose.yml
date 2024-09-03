@@ -1,0 +1,21 @@
+﻿services:
+  scientific_research_center.api:
+    image: scientific_research_center.api
+    build:
+      context: .
+      dockerfile: Scientific_Research_Center.API/Dockerfile
+    ports:
+      - "80:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db
+  
+  db:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=someStrongPassword1!
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
